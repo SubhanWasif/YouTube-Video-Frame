@@ -9,9 +9,8 @@ import cv2
 
 
 
-# Connect to the MongoDB, change the connection string per your MongoDB environment
+# Connecting to the MongoDB
 client = MongoClient('mongodb://localhost:27017/')
-# Replace 'yourdbname' with your actual database name
 db = client['Database']
 collection = db['FrameCollection']
 
@@ -61,7 +60,7 @@ async def send_frame_to_api(frame, video_id, api_endpoint):
 
 
 if __name__ == "__main__":
-    # Define your parameters
+    # parameters
     VIDEO_URL = 'https://www.youtube.com/watch?v=GVPzGBvPrzw'  # Replace with the actual video URL
     DOWNLOAD_PATH = '.'  # Current directory
     FRAME_RATE = 30  # Adjust based on how often you want to extract frames
@@ -73,7 +72,7 @@ if __name__ == "__main__":
     # Extract frames from the downloaded video
     video_path = os.path.join(DOWNLOAD_PATH, 'video.mp4')
     extracted_frames = extract_frames(video_path, FRAME_RATE)
-    # print(extracted_frames)
+
     # Send extracted frames to API
     for frame in extracted_frames:
         asyncio.run(send_frame_to_api(frame, 'GVPzGBvPrzw', API_ENDPOINT))
